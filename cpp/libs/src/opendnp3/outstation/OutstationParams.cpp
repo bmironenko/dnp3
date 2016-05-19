@@ -37,6 +37,7 @@ OutstationParams::OutstationParams() :
 	maxTxFragSize(DEFAULT_MAX_APDU_SIZE),
 	maxRxFragSize(DEFAULT_MAX_APDU_SIZE),
 	allowUnsolicited(false),
+	ignoreRepeatReads(true),
 	typesAllowedInClass0(StaticTypeBitField::AllTypes())
 {
 

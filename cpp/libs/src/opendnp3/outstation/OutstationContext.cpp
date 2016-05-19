@@ -149,8 +149,16 @@ OutstationSolicitedStateBase* OContext::OnReceiveSolRequest(const APDUHeader& he
 			{
 				if (header.function == FunctionCode::READ)
 				{
-					SIMPLE_LOG_BLOCK(this->logger, flags::WARN, "Ignoring repeat read request");
-					return this->sol.pState;
+					if (params.ignoreRepeatReads)
+					{
+						SIMPLE_LOG_BLOCK(this->logger, flags::WARN, "Ignoring repeat read request");
+						return this->sol.pState;
+					}
+					else
+					{
+						SIMPLE_LOG_BLOCK(this->logger, flags::DBG, "Repeat read request");
+						return this->ProcessNewRequest(header, objects);
+					}
 				}
 				else
 				{

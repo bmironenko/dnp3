@@ -66,6 +66,9 @@ struct OutstationParams
 	/// Global enabled / disable for unsolicted messages. If false, the NULL unsolicited message is not even sent
 	bool allowUnsolicited;
 
+	/// Global enable / disable for responding repeat read requests. If true, repeat reads are ignored
+	bool ignoreRepeatReads;
+
 	/// A bitmask type that specifies the types allowed in a class 0 reponse
 	StaticTypeBitField typesAllowedInClass0;
 

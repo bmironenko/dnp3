@@ -1,5 +1,5 @@
 if (UNIX)
-	set(PTHREAD pthread)   
+	set(PTHREAD pthread)
 	find_package(Threads)
 		if(STATICLIBS)
 		set(LIB_TYPE STATIC)
@@ -7,10 +7,15 @@ if (UNIX)
 		set(LIB_TYPE SHARED)
 	endif()
 
-	
+
 	include (CheckLibraryExists)
 	check_library_exists(pthread pthread_timedjoin_np "" HAVE_PHTREAD_TIMEDJOIN_NP)
-	set(CMAKE_C_FLAGS "-g -O2 -Wall -W -Wno-multichar -Wunused-variable -Wno-unused-parameter -Wunused-function -Wunused -Wno-system-headers -Wwrite-strings -fprofile-arcs -ftest-coverage -save-temps")
+	set(CMAKE_C_FLAGS "-g -O2 -Wall -W -Wno-multichar -Wunused-variable -Wno-unused-parameter -Wunused-function -Wunused -Wno-system-headers -Wwrite-strings -save-temps")
+
+	if (${CMAKE_BUILD_TYPE} MATCHES "Debug")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+	endif()
+
 	if (${CYGWIN})
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 	elseif(${MINGW})
@@ -19,7 +24,7 @@ if (UNIX)
 		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 	endif()
 	set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated")
- 
+
 	set(CMAKE_CXX_FLAGS_DEBUG          "-O0 -g")
 	set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
 	set(CMAKE_CXX_FLAGS_RELEASE        "-O4 -DNDEBUG")
@@ -56,10 +61,10 @@ if (UNIX)
 
 	# There's problem with detecting usage of pthread with gcc 4.8.x
 	# http://ubuntuforums.org/showthread.php?t=2183408
-	if(CMAKE_COMPILER_IS_GNUCXX)      
+	if(CMAKE_COMPILER_IS_GNUCXX)
 		if(CMAKE_CXX_COMPILER_VERSION MATCHES 4.8.*)
 			message("Adding pthread workaround for GCC version: ${CMAKE_CXX_COMPILER_VERSION}")
-			SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -Wl,--no-as-needed" )            
+			SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -Wl,--no-as-needed" )
 		endif()
 	endif()
 endif()

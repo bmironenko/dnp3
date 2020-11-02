@@ -38,6 +38,7 @@
 #include <openpal/executor/TimeDuration.h>
 #include <openpal/logging/LogFilters.h>
 
+#include <string>
 #include <vector>
 
 namespace asiodnp3

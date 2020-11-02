@@ -27,6 +27,7 @@
 #include "SteadyClock.h"
 
 #include <asio.hpp>
+#include <functional>
 #include <queue>
 #include <set>
 

@@ -34,6 +34,7 @@ cpp/demos/INSTALL
 # cmake stuff
 CMakeCache.txt
 CMakeFiles/
+cmake-build-debug/
 cmake_install.cmake
 install_manifest.txt
 

@@ -140,6 +140,11 @@ bool OContext::OnReceive(const openpal::RSlice& fragment)
 
 OutstationSolicitedStateBase* OContext::OnReceiveSolRequest(const APDUHeader& header, const openpal::RSlice& objects)
 {
+    // Test change
+    openpal::Logger* pL = &(this->logger);
+    FORMAT_LOGGER_BLOCK(pL, flags::INFO, "Incoming request (seq: %d, function: %d)",
+            header.control.SEQ, FunctionCodeToType(header.function));
+
 	// analyze this request to see how it compares to the last request
 	if (this->history.HasLastRequest())
 	{
